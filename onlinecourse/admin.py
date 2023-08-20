@@ -1,6 +1,6 @@
 from django.contrib import admin
 # <HINT> Import any new Models here
-from .models import Course, Lesson, Instructor, Learner
+from .models import Course, Lesson, Instructor, Learner, Question, Choice
 
 # <HINT> Register QuestionInline and ChoiceInline classes here
 
@@ -22,9 +22,20 @@ class LessonAdmin(admin.ModelAdmin):
     list_display = ['title']
 
 
-# <HINT> Register Question and Choice models here
+class QuestionInline(admin.TabularInline):
+    model = Question
+    extra = 1  # Number of empty forms to display for adding new questions
 
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 1  # Number of empty forms to display for adding new choices
+
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = [ChoiceInline]
+
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
 admin.site.register(Learner)
+

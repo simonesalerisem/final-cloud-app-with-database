@@ -15,10 +15,11 @@ urlpatterns = [
     # ex: /onlinecourse/5/
     path('<int:pk>/', views.CourseDetailView.as_view(), name='course_details'),
     # ex: /enroll/5/
-    path('<int:course_id>/enroll/', views.enroll, name='enroll'),
+    path('enroll/<int:course_id>/', views.enroll, name='enroll'),
+    # Create a route for the submit_exam view
+    path('submit_exam/<int:course_id>/', views.submit_exam, name='submit_exam'),
+    # Create a route for the show_exam_result view
+    path('show_exam_result/', views.show_exam_result, name='show_exam_result'),
 
-    # <HINT> Create a route for submit view
 
-    # <HINT> Create a route for show_exam_result view
-
- ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
